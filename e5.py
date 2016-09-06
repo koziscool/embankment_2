@@ -1,3 +1,4 @@
+import time
 
 def e5():
     primes = [ 2, 3, 5, 7, 11, 13, 17, 19 ]
@@ -26,4 +27,8 @@ def e5():
 
 
 if __name__ == "__main__":
-    print e5()
+    start = time.time()
+    print
+    print "Euler 5 solution is:",  e5()
+    end = time.time()
+    print "elapsed time is: %.4f milliseconds" % (1000 * (end - start)),
