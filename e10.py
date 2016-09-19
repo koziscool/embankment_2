@@ -4,26 +4,23 @@ import time
 
 def e10():
 
-    primes = [2]
-    current_counter = 3
+    end_range = 2 * 10 ** 6
+    def primes_and_totients( num ):
+        primes = []
+        totients = [1 for i in xrange(num + 1)]
+        for i in xrange(2, num + 1):
+            if totients[i] == 1:
+                primes.append(i)
+                for j in xrange(i, num + 1, i):
+                    totients[j] *= i - 1
+                    k = j / i
+                    while k % i == 0:
+                        totients[j] *= i
+                        k /= i
 
-    while primes[-1] < 2 * 10 ** 6:
-        is_prime = True
-        for p in primes:
-            if p ** 2 > current_counter:
-                break
-            if current_counter % p == 0:
-                is_prime = False
-                break
-        if is_prime:
-            primes.append( current_counter )
+        return primes, totients
 
-        current_counter += 1
-
-    primes.pop()
-    return sum( primes )
-
-
+    return sum( primes_and_totients( end_range )[0] )
 
 if __name__ == "__main__":
     start = time.time()
