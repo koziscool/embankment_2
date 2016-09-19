@@ -2,12 +2,12 @@
 
 import time
 
-def e7():
+def e10():
 
     primes = [2]
     current_counter = 3
 
-    while len(primes) < 10001:
+    while primes[-1] < 2 * 10 ** 6:
         is_prime = True
         for p in primes:
             if p ** 2 > current_counter:
@@ -20,7 +20,8 @@ def e7():
 
         current_counter += 1
 
-    return primes.pop()
+    primes.pop()
+    return sum( primes )
 
 
 
@@ -28,7 +29,7 @@ if __name__ == "__main__":
     start = time.time()
     # print
     print
-    print "Euler 7 solution is:",  e7()
+    print "Euler 10 solution is:",  e10()
     end = time.time()
     print "elapsed time is: %.4f milliseconds" % (1000 * (end - start)),
 
