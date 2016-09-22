@@ -21,7 +21,6 @@ def e12():
                     prime_divisors[j].append( p )
                 else:
                     prime_divisors[j] = [p]
-
                 totients[j] *= p - 1
                 k = j / p
                 while k % p == 0:
@@ -71,6 +70,7 @@ def e12():
         num_factors = reduce( operator.mul, map( lambda n: n+1, combined_factors.values() ), 1)
 
         if num_factors > 500:
+            print triangle_cursor, triangle, combined_factors, num_factors
             break
 
         triangle_cursor += 1
