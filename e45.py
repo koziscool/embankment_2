@@ -2,11 +2,22 @@
 import time
 
 def e45():
-    trianges = { i * (i+1) / 2 for i in xrange(1,100000) }
-    pentagons = { i * (3*i-1) / 2 for i in xrange(1,100000) }
-    hexagons = { i * (2*i-1) for i in xrange(1,100000) }
+    pentagon_set = set()
+    pentagon_hash = {}
 
-    return sorted( list(trianges & pentagons & hexagons) )[2]
+    n,p = 0,0 
+    while True:
+        p += 3*n + 1
+        if pentagon_hash.has_key( p ):
+            return pentagon_hash[p]
+        
+        for smaller_p in pentagon_set:
+            diff = p - smaller_p
+            if diff in pentagon_set:
+                pentagon_hash[ p + smaller_p ] = diff
+
+        pentagon_set.add( p )
+        n += 1  
 
 if __name__ == "__main__":
     start = time.time()
@@ -15,3 +26,5 @@ if __name__ == "__main__":
     end = time.time()
     print "elapsed time is: %.4f milliseconds" % (1000 * (end - start)),
     print
+
+
