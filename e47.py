@@ -1,7 +1,7 @@
 import time
 import operator
 
-def e12():
+def e47():
     prime_divisors = { 1: [] }
     begin_cursor, end_cursor = 2, 200
     primes = []
@@ -41,47 +41,30 @@ def e12():
                         totients[j] *= i
                         k /= i
 
-    def get_factors( n ):
-        prime_product = reduce( operator.mul, prime_divisors[n], 1)
-        reduce_quotient = n / prime_product
-        factors_dict = { p:1 for p in prime_divisors[n] }
-        while reduce_quotient != 1:
-            prime_product = reduce( operator.mul, prime_divisors[reduce_quotient], 1)
-            for p in prime_divisors[reduce_quotient]:
-                factors_dict[p] += 1
-            reduce_quotient /= prime_product
-
-        return factors_dict
-
     primes_and_totients( begin_cursor, end_cursor )
 
-    triangle_cursor = 1
+    test_cursor = 2
+
     while True:
-        triangle = triangle_cursor * (triangle_cursor + 1) / 2
-
-        if triangle_cursor + 1 > end_cursor:
+        if test_cursor + 3 > end_cursor:
             begin_cursor, end_cursor = end_cursor + 1, 2* end_cursor
-            primes_and_totients( begin_cursor, end_cursor )
+            primes_and_totients( begin_cursor, end_cursor )    
 
-        factors_1 = get_factors( triangle_cursor )
-        factors_2 = get_factors( triangle_cursor + 1)
-        combined_factors = dict(factors_1, **factors_2)
-        combined_factors[2] -=1
-        num_factors = reduce( operator.mul, map( lambda n: n+1, combined_factors.values() ), 1)
+        if ( len( prime_divisors[test_cursor] ) == 4 and len( prime_divisors[test_cursor+1] ) == 4
+                and len( prime_divisors[test_cursor+2] ) == 4 
+                and len( prime_divisors[test_cursor+3] ) == 4 ):
 
-        if num_factors > 500:
-            # print triangle_cursor, triangle, combined_factors, num_factors
+            # print prime_divisors[test_cursor], prime_divisors[test_cursor+1], \
+                    # prime_divisors[test_cursor+2], prime_divisors[test_cursor+3]
             break
+        test_cursor += 1
 
-        triangle_cursor += 1
-
-    return triangle
-
+    return test_cursor
 
 if __name__ == "__main__":
     start = time.time()
     print
-    print "Euler 12 solution is:",  e12()
+    print "Euler 47 solution is:",  e47()
     end = time.time()
     print "elapsed time is: %.4f milliseconds" % (1000 * (end - start)),
 
