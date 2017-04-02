@@ -4,7 +4,7 @@ def e5():
     primes = [ 2, 3, 5, 7, 11, 13, 17, 19 ]
     lcm_factors = {}
 
-    for i in xrange( 1, 20 ):
+    for i in xrange( 1, 21 ):
         quotient = i
         for p in primes:
             divisor_count = 0
